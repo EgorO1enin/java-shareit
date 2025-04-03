@@ -10,8 +10,6 @@ import java.util.List;
 public interface ItemService {
     ItemResponesModel addItem(Long userId, ItemRequestModel itemRequestModel);
 
-    List<ItemResponesModel> getItems();
-
     ItemResponesModel getItemById(Long id);
 
     ItemResponesModel updateItem(Long userId, Long itemId, ItemRequestModel itemRequestModel);

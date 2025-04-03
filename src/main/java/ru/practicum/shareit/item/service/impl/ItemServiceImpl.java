@@ -4,14 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import ru.practicum.shareit.item.ItemRepository;
+import ru.practicum.shareit.item.repository.ItemRepository;
 import ru.practicum.shareit.item.converter.ItemRequestToItemConverter;
 import ru.practicum.shareit.item.converter.ItemToResponesModelConverter;
 import ru.practicum.shareit.item.dto.ItemRequestModel;
 import ru.practicum.shareit.item.dto.ItemResponesModel;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.service.ItemService;
-import ru.practicum.shareit.user.dto.User;
+import ru.practicum.shareit.user.model.User;
 import ru.practicum.shareit.user.repository.UserRepository;
 
 import java.util.List;
@@ -33,13 +33,6 @@ public class ItemServiceImpl implements ItemService {
         Item item = itemRequestToItemConverter.convert(itemRequestModel);
         item.setOwner(user);
         return itemToResponesModelConverter.convert(itemRepository.addItem(item));
-    }
-
-    @Override
-    public List<ItemResponesModel> getItems() {
-        return itemRepository.getItems().stream()
-                .map(itemToResponesModelConverter::convert)
-                .toList();
     }
 
     @Override
@@ -91,6 +84,5 @@ public class ItemServiceImpl implements ItemService {
         }
 
         return itemRepository.searchItems(text).stream().map(itemToResponesModelConverter::convert).toList();
-
     }
 }

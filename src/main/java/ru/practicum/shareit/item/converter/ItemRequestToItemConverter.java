@@ -11,6 +11,7 @@ public class ItemRequestToItemConverter {
         source.setName(item.getName());
         source.setDescription(item.getDescription());
         source.setAvailable(item.getAvailable());
+        //на данном этапе этот код не нужен поэтому я его закоментил))
         //item.getRequestId() != null ? item.getRequestId().getId() : null
         return source;
     }

@@ -1,7 +1,7 @@
 package ru.practicum.shareit.user.converter;
 
 import org.springframework.stereotype.Component;
-import ru.practicum.shareit.user.dto.User;
+import ru.practicum.shareit.user.model.User;
 import ru.practicum.shareit.user.dto.UserRequestModel;
 
 @Component

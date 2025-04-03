@@ -1,4 +1,4 @@
-package ru.practicum.shareit.item;
+package ru.practicum.shareit.item.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -39,17 +39,10 @@ public class ItemController {
         return itemService.getItemById(itemId);
     }
 
-   /* // Просмотр всех вещей владельца
-    @GetMapping
-    public List<ItemResponesModel> getAllItems() {
-        return itemService.getItems();
-    }*/
-
     @GetMapping
     public List<ItemResponesModel> getAllItemsOfUser(@RequestHeader("X-Sharer-User-Id") Long userId) {
         return itemService.getAllItemsOfUser(userId);
     }
-
 
     // Поиск доступных вещей
     @GetMapping("/search")
@@ -57,10 +50,4 @@ public class ItemController {
         return itemService.searchItems(text);
     }
 
-    /*// Удаление вещи
-    @DeleteMapping("/{itemId}")
-    public void deleteItem(@RequestHeader("X-Sharer-User-Id") Long userId,
-                           @PathVariable Long itemId) {
-        itemService.deleteItem(userId, itemId);
-    }*/
 }

@@ -2,10 +2,10 @@ package ru.practicum.shareit.user.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.practicum.shareit.NotFoundException;
+import ru.practicum.shareit.exception.NotFoundException;
 import ru.practicum.shareit.user.converter.UserRequestToUserConverter;
 import ru.practicum.shareit.user.converter.UserToUserResponesConverter;
-import ru.practicum.shareit.user.dto.User;
+import ru.practicum.shareit.user.model.User;
 import ru.practicum.shareit.user.dto.UserRequestModel;
 import ru.practicum.shareit.user.dto.UserResponesModel;
 import ru.practicum.shareit.user.dto.UserUpdateModel;
