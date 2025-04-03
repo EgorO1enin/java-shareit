@@ -14,7 +14,7 @@ public interface ItemService {
 
     ItemResponesModel getItemById(Long id);
 
-    ItemResponesModel updateItem(Long UserId, Long itemId, ItemRequestModel itemRequestModel);
+    ItemResponesModel updateItem(Long userId, Long itemId, ItemRequestModel itemRequestModel);
 
     List<ItemResponesModel> getAllItemsOfUser(Long userId);
 
