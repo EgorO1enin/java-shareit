@@ -52,10 +52,10 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemResponesModel updateItem(Long UserId, Long itemId, ItemRequestModel itemRequestModel) {
-        User user = userRepository.getUserById(UserId);
+    public ItemResponesModel updateItem(Long userId, Long itemId, ItemRequestModel itemRequestModel) {
+        User user = userRepository.getUserById(userId);
         if (user == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Пользователь с id " + UserId + " не найден.");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Пользователь с id " + userId + " не найден.");
         }
         Item updatedItem = itemRepository.getItemById(itemId);
         if (updatedItem == null) {
