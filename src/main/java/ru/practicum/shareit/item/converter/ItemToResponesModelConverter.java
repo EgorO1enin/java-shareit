@@ -1,13 +1,13 @@
 package ru.practicum.shareit.item.converter;
 
 import org.springframework.stereotype.Component;
-import ru.practicum.shareit.item.dto.ItemResponesModel;
+import ru.practicum.shareit.item.dto.ItemResponesDto;
 import ru.practicum.shareit.item.model.Item;
 
 @Component
 public class ItemToResponesModelConverter {
-    public ItemResponesModel convert(final Item item) {
-        return new ItemResponesModel(
+    public ItemResponesDto convert(final Item item) {
+        return new ItemResponesDto(
                 item.getId(),
                 item.getName(),
                 item.getDescription(),

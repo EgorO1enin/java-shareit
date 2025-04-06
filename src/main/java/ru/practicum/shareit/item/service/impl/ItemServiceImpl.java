@@ -7,8 +7,8 @@ import org.springframework.web.server.ResponseStatusException;
 import ru.practicum.shareit.item.repository.ItemRepository;
 import ru.practicum.shareit.item.converter.ItemRequestToItemConverter;
 import ru.practicum.shareit.item.converter.ItemToResponesModelConverter;
-import ru.practicum.shareit.item.dto.ItemRequestModel;
-import ru.practicum.shareit.item.dto.ItemResponesModel;
+import ru.practicum.shareit.item.dto.ItemRequestDto;
+import ru.practicum.shareit.item.dto.ItemResponesDto;
 import ru.practicum.shareit.item.model.Item;
 import ru.practicum.shareit.item.service.ItemService;
 import ru.practicum.shareit.user.model.User;
@@ -25,7 +25,7 @@ public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
 
     @Override
-    public ItemResponesModel addItem(Long userId, ItemRequestModel itemRequestModel) {
+    public ItemResponesDto addItem(Long userId, ItemRequestDto itemRequestModel) {
         User user = userRepository.getUserById(userId);
         if (user == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Пользователь с id " + userId + " не найден.");
@@ -36,7 +36,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemResponesModel getItemById(Long id) {
+    public ItemResponesDto getItemById(Long id) {
         Item item = itemRepository.getItemById(id);
         if (item == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Вещь с id " + id + " не найдена.");
@@ -45,7 +45,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemResponesModel updateItem(Long userId, Long itemId, ItemRequestModel itemRequestModel) {
+    public ItemResponesDto updateItem(Long userId, Long itemId, ItemRequestDto itemRequestModel) {
         User user = userRepository.getUserById(userId);
         if (user == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Пользователь с id " + userId + " не найден.");
@@ -67,7 +67,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemResponesModel> getAllItemsOfUser(Long userId) {
+    public List<ItemResponesDto> getAllItemsOfUser(Long userId) {
         User user = userRepository.getUserById(userId);
         if (user == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Пользователь с id " + userId + " не найден.");
@@ -78,7 +78,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemResponesModel> searchItems(String text) {
+    public List<ItemResponesDto> searchItems(String text) {
         if (text == null || text.isEmpty()) {
             return List.of();
         }

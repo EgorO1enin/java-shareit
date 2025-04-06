@@ -3,12 +3,11 @@ package ru.practicum.shareit.user.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.practicum.shareit.exception.NotFoundException;
-import ru.practicum.shareit.user.converter.UserRequestToUserConverter;
-import ru.practicum.shareit.user.converter.UserToUserResponesConverter;
+import ru.practicum.shareit.user.converter.UserMapper;
 import ru.practicum.shareit.user.model.User;
-import ru.practicum.shareit.user.dto.UserRequestModel;
-import ru.practicum.shareit.user.dto.UserResponesModel;
-import ru.practicum.shareit.user.dto.UserUpdateModel;
+import ru.practicum.shareit.user.dto.UserRequestDto;
+import ru.practicum.shareit.user.dto.UserResponesDto;
+import ru.practicum.shareit.user.dto.UserUpdateDto;
 import ru.practicum.shareit.user.repository.UserRepository;
 import ru.practicum.shareit.user.service.UserService;
 
@@ -18,33 +17,32 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final UserRequestToUserConverter userRequestToUserConverter;
-    private final UserToUserResponesConverter userToUserResponesConverter;
+    private final UserMapper userMapper;
 
     @Override
-    public UserResponesModel addUser(UserRequestModel user) {
+    public UserResponesDto addUser(UserRequestDto user) {
         if (userRepository.getMailes().contains(user.getEmail())) {
             throw new IllegalArgumentException("Пользователь с email " + user.getEmail() + " уже существует.");
 
         }
-        User addedUser = userRepository.addUser(userRequestToUserConverter.convert(user));
-        return userToUserResponesConverter.convert(addedUser);
+        User addedUser = userRepository.addUser(userMapper.toUser(user));
+        return userMapper.toUserResponesDto(addedUser);
     }
 
     @Override
-    public List<UserResponesModel> getAllUsers() {
+    public List<UserResponesDto> getAllUsers() {
         return userRepository.getAllUsers().stream()
-                .map(userToUserResponesConverter::convert)
+                .map(userMapper::toUserResponesDto)
                 .toList();
     }
 
     @Override
-    public UserResponesModel getUserById(Long id) {
-        return userToUserResponesConverter.convert(userRepository.getUserById(id));
+    public UserResponesDto getUserById(Long id) {
+        return userMapper.toUserResponesDto(userRepository.getUserById(id));
     }
 
     @Override
-    public UserResponesModel updateUser(Long id, UserUpdateModel userRequest) {
+    public UserResponesDto updateUser(Long id, UserUpdateDto userRequest) {
         if (userRepository.getMailes().contains(userRequest.getEmail())) {
             throw new IllegalArgumentException("Пользователь с email " + userRequest.getEmail() + " уже существует.");
 
@@ -60,7 +58,7 @@ public class UserServiceImpl implements UserService {
             user.setEmail(userRequest.getEmail());
         }
         User updatedUser = userRepository.updateUser(id, user);
-        return userToUserResponesConverter.convert(updatedUser);
+        return userMapper.toUserResponesDto(updatedUser);
     }
 
     @Override

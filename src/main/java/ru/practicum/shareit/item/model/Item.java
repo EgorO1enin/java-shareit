@@ -3,7 +3,7 @@ package ru.practicum.shareit.item.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.practicum.shareit.request.dto.ItemRequestModel;
+import ru.practicum.shareit.request.dto.ItemRequestDto;
 import ru.practicum.shareit.user.model.User;
 
 /**
@@ -18,5 +18,5 @@ public class Item {
     private String description; // развёрнутое описание
     private boolean available; // статус доступности для аренды
     private User owner; // владелец вещи
-    private ItemRequestModel request;
+    private ItemRequestDto request;
 }

@@ -8,7 +8,7 @@ import ru.practicum.shareit.user.model.User;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ItemResponesModel {
+public class ItemResponesDto {
     private Long id;
     private String name;
     private String description;

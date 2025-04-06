@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 @NoArgsConstructor
-public class UserUpdateModel {
+public class UserUpdateDto   {
     private String name;
     private String email;
 }

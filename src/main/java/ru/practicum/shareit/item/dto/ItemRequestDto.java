@@ -8,7 +8,7 @@ import lombok.Data;
 
 @AllArgsConstructor
 @Data
-public class ItemRequestModel {
+public class ItemRequestDto {
     @NotBlank(message = "Название вещи не может быть пустым.")
     private String name;
     @NotBlank(message = "Описание вещи не может быть пустым.")
