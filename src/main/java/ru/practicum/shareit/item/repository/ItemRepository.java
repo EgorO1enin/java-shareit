@@ -2,7 +2,6 @@ package ru.practicum.shareit.item.repository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import ru.practicum.shareit.item.converter.ItemRequestToItemConverter;
 import ru.practicum.shareit.item.model.Item;
 
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ import java.util.Map;
 public class ItemRepository {
     private final Map<Long, Item> items = new HashMap<>(); // Хранилище вещей
     private Long itemIdCounter = 1L;
-    private final ItemRequestToItemConverter itemRequestToItemConverter;
 
     public Item addItem(Item item) {
         item.setId(itemIdCounter++);
