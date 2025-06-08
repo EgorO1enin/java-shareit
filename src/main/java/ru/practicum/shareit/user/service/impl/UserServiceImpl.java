@@ -2,6 +2,7 @@ package ru.practicum.shareit.user.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.exception.NotFoundException;
 import ru.practicum.shareit.user.dto.UserRequestDto;
 import ru.practicum.shareit.user.dto.UserResponesDto;
@@ -15,54 +16,60 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
+@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
     @Override
+    @Transactional
     public UserResponesDto addUser(UserRequestDto user) {
-        if (userRepository.getMailes().contains(user.getEmail())) {
+        if (userRepository.existsByEmail(user.getEmail())) {
             throw new IllegalArgumentException("Пользователь с email " + user.getEmail() + " уже существует.");
-
         }
-        User addedUser = userRepository.addUser(userMapper.toUser(user));
-        return userMapper.toUserResponesDto(addedUser);
+        User newUser = userMapper.toUser(user);
+        return userMapper.toUserResponesDto(userRepository.save(newUser));
     }
 
     @Override
     public List<UserResponesDto> getAllUsers() {
-        return userRepository.getAllUsers().stream()
+        return userRepository.findAll().stream()
                 .map(userMapper::toUserResponesDto)
                 .toList();
     }
 
     @Override
     public UserResponesDto getUserById(Long id) {
-        return userMapper.toUserResponesDto(userRepository.getUserById(id));
+        return userMapper.toUserResponesDto(userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Пользователь с id " + id + " не найден")));
     }
 
     @Override
-    public UserResponesDto updateUser(Long id, UserUpdateDto userRequest) {
-        if (userRepository.getMailes().contains(userRequest.getEmail())) {
-            throw new IllegalArgumentException("Пользователь с email " + userRequest.getEmail() + " уже существует.");
+    @Transactional
+    public UserResponesDto updateUser(Long id, UserUpdateDto userUpdateDto) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Пользователь с id " + id + " не найден"));
 
+        if (userUpdateDto.getName() != null) {
+            user.setName(userUpdateDto.getName());
         }
-        User user = userRepository.getUserById(id);
-        if (user == null) {
-            throw new NotFoundException("Пользователь с ID " + id + " не найден.");
+        if (userUpdateDto.getEmail() != null) {
+            if (!userUpdateDto.getEmail().equals(user.getEmail()) && 
+                userRepository.existsByEmail(userUpdateDto.getEmail())) {
+                throw new IllegalArgumentException("Пользователь с email " + userUpdateDto.getEmail() + " уже существует.");
+            }
+            user.setEmail(userUpdateDto.getEmail());
         }
-        if (userRequest.getName() != null) {
-            user.setName(userRequest.getName());
-        }
-        if (userRequest.getEmail() != null) {
-            user.setEmail(userRequest.getEmail());
-        }
-        User updatedUser = userRepository.updateUser(id, user);
-        return userMapper.toUserResponesDto(updatedUser);
+
+        return userMapper.toUserResponesDto(userRepository.save(user));
     }
 
     @Override
+    @Transactional
     public void deleteUser(Long id) {
-        userRepository.deleteUserById(id);
+        if (!userRepository.existsById(id)) {
+            throw new NotFoundException("Пользователь с id " + id + " не найден");
+        }
+        userRepository.deleteById(id);
     }
 }
