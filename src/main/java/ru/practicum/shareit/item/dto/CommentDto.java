@@ -7,4 +7,4 @@ import lombok.Data;
 public class CommentDto {
     @NotBlank(message = "Текст комментария не может быть пустым")
     private String text;
-} 
+}

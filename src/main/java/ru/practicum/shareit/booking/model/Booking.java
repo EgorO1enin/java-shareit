@@ -43,4 +43,4 @@ public class Booking {
         REJECTED,   // отклонено
         CANCELLED   // отменено
     }
-} 
+}

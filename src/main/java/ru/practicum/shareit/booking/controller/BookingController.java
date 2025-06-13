@@ -66,4 +66,4 @@ public class BookingController {
             @RequestParam(defaultValue = "10") @Positive @Parameter(description = "Количество элементов для отображения") int size) {
         return ResponseEntity.ok(bookingService.getOwnerBookings(userId, state, from, size));
     }
-} 
+}

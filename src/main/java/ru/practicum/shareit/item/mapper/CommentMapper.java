@@ -10,4 +10,4 @@ public interface CommentMapper {
     @Mapping(target = "author", source = "author")
     @Mapping(target = "authorName", expression = "java(comment.getAuthor().getName())")
     CommentResponseDto toCommentResponseDto(Comment comment);
-} 
+}

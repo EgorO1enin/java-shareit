@@ -172,4 +172,4 @@ public class BookingServiceImpl implements BookingService {
                 .map(bookingMapper::toBookingResponseDto)
                 .toList();
     }
-} 
+}

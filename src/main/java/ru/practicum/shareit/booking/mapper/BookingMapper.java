@@ -10,4 +10,4 @@ public interface BookingMapper {
     @Mapping(target = "item", source = "item")
     @Mapping(target = "booker", source = "booker")
     BookingResponseDto toBookingResponseDto(Booking booking);
-} 
+}

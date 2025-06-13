@@ -15,4 +15,4 @@ public class BookingResponseDto {
     private ItemResponesDto item;
     private UserResponesDto booker;
     private Booking.BookingStatus status;
-} 
+}

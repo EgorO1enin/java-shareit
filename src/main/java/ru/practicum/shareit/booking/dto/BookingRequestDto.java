@@ -18,4 +18,4 @@ public class BookingRequestDto {
     @NotNull(message = "Дата окончания бронирования не может быть пустой")
     @Future(message = "Дата окончания бронирования должна быть в будущем")
     private LocalDateTime end;
-} 
+}
