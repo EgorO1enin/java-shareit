@@ -42,7 +42,6 @@ public class ItemServiceImpl implements ItemService {
     public ItemResponesDto addItem(Long userId, ItemRequestDto itemRequestDto) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Пользователь с id " + userId + " не найден"));
-        
         Item item = itemMapper.toItem(itemRequestDto);
         item.setOwner(user);
         return itemMapper.toItemRespones(itemRepository.save(item));
@@ -53,14 +52,13 @@ public class ItemServiceImpl implements ItemService {
     public ItemResponesDto updateItem(Long userId, Long itemId, ItemRequestDto itemRequestDto) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Пользователь с id " + userId + " не найден"));
-        
+
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new NotFoundException("Вещь с id " + itemId + " не найдена"));
-        
+
         if (!item.getOwner().getId().equals(userId)) {
             throw new NotFoundException("Пользователь не является владельцем вещи");
         }
-
         if (itemRequestDto.getName() != null) {
             item.setName(itemRequestDto.getName());
         }
@@ -70,7 +68,6 @@ public class ItemServiceImpl implements ItemService {
         if (itemRequestDto.getAvailable() != null) {
             item.setAvailable(itemRequestDto.getAvailable());
         }
-        
         return itemMapper.toItemRespones(itemRepository.save(item));
     }
 
@@ -83,7 +80,6 @@ public class ItemServiceImpl implements ItemService {
         dto.setComments(commentRepository.findByItemIdOrderByCreatedDesc(itemId).stream()
                 .map(commentMapper::toCommentResponseDto)
                 .collect(Collectors.toList()));
-
         return dto;
     }
 
@@ -92,7 +88,6 @@ public class ItemServiceImpl implements ItemService {
         if (!userRepository.existsById(userId)) {
             throw new NotFoundException("Пользователь не найден");
         }
-
         return itemRepository.findByOwnerId(userId).stream()
                 .map(item -> {
                     ItemResponesDto dto = itemMapper.toItemRespones(item);
@@ -119,24 +114,19 @@ public class ItemServiceImpl implements ItemService {
     public CommentResponseDto addComment(Long userId, Long itemId, CommentDto commentDto) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Пользователь не найден"));
-        
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new NotFoundException("Вещь не найдена"));
-
         // Проверяем, что пользователь брал вещь в аренду
         List<Booking> bookings = bookingRepository.findBookingsByBookerIdAndItemIdAndStatusAndEndBefore(
                 userId, itemId, Booking.BookingStatus.APPROVED, LocalDateTime.now());
-        
         if (bookings.isEmpty()) {
             throw new BadRequestException("Пользователь не брал вещь в аренду");
         }
-
         Comment comment = new Comment();
         comment.setText(commentDto.getText());
         comment.setItem(item);
         comment.setAuthor(user);
         comment.setCreated(LocalDateTime.now());
-
         return commentMapper.toCommentResponseDto(commentRepository.save(comment));
     }
 }

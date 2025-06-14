@@ -23,7 +23,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = "Управление вещами", description = "API для работы с вещами (предметами) для аренды")
 public class ItemController {
-
     private final ItemService itemService;
 
     @PostMapping
@@ -133,13 +132,13 @@ public class ItemController {
             @RequestParam
             @Parameter(description = "Текст для поиска", required = true, example = "дрель")
             String text,
-            @RequestParam(defaultValue = "0") 
-            @PositiveOrZero 
+            @RequestParam(defaultValue = "0")
+            @PositiveOrZero
             @Parameter(description = "Индекс первого элемента")
             int from,
-            @RequestParam(defaultValue = "10") 
-            @Positive 
-            @Parameter(description = "Количество элементов для отображения") 
+            @RequestParam(defaultValue = "10")
+            @Positive
+            @Parameter(description = "Количество элементов для отображения")
             int size) {
         return ResponseEntity.ok(itemService.searchItems(text, from, size));
     }
@@ -162,16 +161,17 @@ public class ItemController {
                             description = "Вещь или пользователь не найдены"
                     )
             })
+
     public ResponseEntity<CommentResponseDto> addComment(
-            @RequestHeader("X-Sharer-User-Id") 
-            @Parameter(description = "ID пользователя") 
+            @RequestHeader("X-Sharer-User-Id")
+            @Parameter(description = "ID пользователя")
             Long userId,
-            @PathVariable 
-            @Parameter(description = "ID вещи") 
+            @PathVariable
+            @Parameter(description = "ID вещи")
             Long itemId,
-            @Valid 
-            @RequestBody 
-            @Parameter(description = "Данные комментария") 
+            @Valid
+            @RequestBody
+            @Parameter(description = "Данные комментария")
             CommentDto commentDto) {
         return ResponseEntity.ok(itemService.addComment(userId, itemId, commentDto));
     }
