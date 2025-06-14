@@ -9,6 +9,7 @@ import ru.practicum.shareit.booking.model.Booking.BookingStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
@@ -42,4 +43,18 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     List<Booking> findOverlappingBookings(Long itemId, LocalDateTime start, LocalDateTime end);
 
     List<Booking> findBookingsByBookerIdAndItemIdAndStatusAndEndBefore(Long bookerId, Long itemId, BookingStatus status, LocalDateTime nowtime);
+
+    @Query("SELECT b FROM Booking b " +
+           "WHERE b.item.id = :itemId " +
+           "AND b.status = 'APPROVED' " +
+           "AND b.end < :now " +
+           "ORDER BY b.end DESC")
+    Optional<Booking> findLastBooking(Long itemId, LocalDateTime now);
+
+    @Query("SELECT b FROM Booking b " +
+           "WHERE b.item.id = :itemId " +
+           "AND b.status = 'APPROVED' " +
+           "AND b.start > :now " +
+           "ORDER BY b.start ASC")
+    Optional<Booking> findNextBooking(Long itemId, LocalDateTime now);
 }

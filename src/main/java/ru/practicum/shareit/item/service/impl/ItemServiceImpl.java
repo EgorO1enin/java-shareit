@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.practicum.shareit.booking.mapper.BookingMapper;
 import ru.practicum.shareit.booking.model.Booking;
 import ru.practicum.shareit.booking.repository.BookingRepository;
 import ru.practicum.shareit.exception.BadRequestException;
@@ -36,6 +37,7 @@ public class ItemServiceImpl implements ItemService {
     private final CommentRepository commentRepository;
     private final ItemMapper itemMapper;
     private final CommentMapper commentMapper;
+    private final BookingMapper bookingMapper;
 
     @Override
     @Transactional
@@ -80,6 +82,15 @@ public class ItemServiceImpl implements ItemService {
         dto.setComments(commentRepository.findByItemIdOrderByCreatedDesc(itemId).stream()
                 .map(commentMapper::toCommentResponseDto)
                 .collect(Collectors.toList()));
+
+        if (item.getOwner().getId().equals(userId)) {
+            LocalDateTime now = LocalDateTime.now();
+            bookingRepository.findLastBooking(itemId, now)
+                    .ifPresent(booking -> dto.setLastBooking(bookingMapper.toBookingResponseDto(booking)));
+            bookingRepository.findNextBooking(itemId, now)
+                    .ifPresent(booking -> dto.setNextBooking(bookingMapper.toBookingResponseDto(booking)));
+        }
+
         return dto;
     }
 
@@ -88,12 +99,22 @@ public class ItemServiceImpl implements ItemService {
         if (!userRepository.existsById(userId)) {
             throw new NotFoundException("Пользователь не найден");
         }
+
+        LocalDateTime now = LocalDateTime.now();
         return itemRepository.findByOwnerId(userId).stream()
                 .map(item -> {
                     ItemResponesDto dto = itemMapper.toItemRespones(item);
                     dto.setComments(commentRepository.findByItemIdOrderByCreatedDesc(item.getId()).stream()
                             .map(commentMapper::toCommentResponseDto)
                             .collect(Collectors.toList()));
+
+                    if (item.getOwner().getId().equals(userId)) {
+                        bookingRepository.findLastBooking(item.getId(), now)
+                                .ifPresent(booking -> dto.setLastBooking(bookingMapper.toBookingResponseDto(booking)));
+                        bookingRepository.findNextBooking(item.getId(), now)
+                                .ifPresent(booking -> dto.setNextBooking(bookingMapper.toBookingResponseDto(booking)));
+                    }
+
                     return dto;
                 })
                 .collect(Collectors.toList());
