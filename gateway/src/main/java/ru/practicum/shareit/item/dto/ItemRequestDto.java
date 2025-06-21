@@ -17,4 +17,4 @@ public class ItemRequestDto {
     @NotNull(message = "Владелец вещи не может быть пустым.")
     private Boolean available;
     private Long requestId;
-} 
+}

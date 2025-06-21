@@ -62,4 +62,4 @@ public class UserController {
         log.info("Delete user {}", userId);
         return userClient.deleteUser(userId);
     }
-} 
+}

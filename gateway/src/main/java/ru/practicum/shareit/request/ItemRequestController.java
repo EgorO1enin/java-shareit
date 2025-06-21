@@ -59,4 +59,4 @@ public class ItemRequestController {
         log.info("Get item request {} for user {}", requestId, userId);
         return itemRequestClient.getRequestById(userId, requestId);
     }
-} 
+}

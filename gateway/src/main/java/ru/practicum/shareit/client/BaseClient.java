@@ -66,6 +66,7 @@ public class BaseClient {
     protected <T> ResponseEntity<Object> patch(String path, long userId, T body) {
         return patch(path, userId, null, body);
     }
+
     protected <T> ResponseEntity<Object> patch(String path, long userId, long id, boolean approve) {
         Map<String, Object> parameters = Map.of("approved", approve);
         return makeAndSendRequest(HttpMethod.PATCH, path, userId, parameters, null);

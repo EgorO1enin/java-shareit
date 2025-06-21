@@ -11,4 +11,4 @@ public class UserRequestDto {
     @NotNull(message = "Email не может быть пустым.")
     @Email(message = "Некорректный email.")
     private String email;
-} 
+}
