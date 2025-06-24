@@ -38,12 +38,11 @@ class BookingRequestDtoJsonTest {
 
     @Test
     void deserialize_ShouldDeserializeCorrectly() throws JsonProcessingException {
-        String json = """
-                {
-                    "itemId": 1,
-                    "start": "2024-01-15T10:00:00",
-                    "end": "2024-01-16T10:00:00"
-                }""";
+        String json = "{\n" +
+                "    \"itemId\": 1,\n" +
+                "    \"start\": \"2024-01-15T10:00:00\",\n" +
+                "    \"end\": \"2024-01-16T10:00:00\"\n" +
+                "}";
 
         BookingRequestDto result = objectMapper.readValue(json, BookingRequestDto.class);
 
@@ -55,12 +54,11 @@ class BookingRequestDtoJsonTest {
 
     @Test
     void deserialize_ShouldHandleNullValues() throws JsonProcessingException {
-        String json = """
-                {
-                    "itemId": null,
-                    "start": null,
-                    "end": null
-                }""";
+        String json = "{\n" +
+                "    \"itemId\": null,\n" +
+                "    \"start\": null,\n" +
+                "    \"end\": null\n" +
+                "}";
 
         BookingRequestDto result = objectMapper.readValue(json, BookingRequestDto.class);
 
@@ -94,12 +92,11 @@ class BookingRequestDtoJsonTest {
 
     @Test
     void deserialize_ShouldHandleDifferentDateTimeFormats() throws JsonProcessingException {
-        String json = """
-                {
-                    "itemId": 1,
-                    "start": "2024-01-15T10:00:00.000",
-                    "end": "2024-01-16T10:00:00.000"
-                }""";
+        String json = "{\n" +
+                "    \"itemId\": 1,\n" +
+                "    \"start\": \"2024-01-15T10:00:00.000\",\n" +
+                "    \"end\": \"2024-01-16T10:00:00.000\"\n" +
+                "}";
 
         BookingRequestDto result = objectMapper.readValue(json, BookingRequestDto.class);
 

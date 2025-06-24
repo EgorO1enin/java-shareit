@@ -31,11 +31,10 @@ class UserRequestDtoJsonTest {
 
     @Test
     void deserialize_ShouldDeserializeCorrectly() throws JsonProcessingException {
-        String json = """
-                {
-                    "name": "Test User",
-                    "email": "test@example.com"
-                }""";
+        String json = "{\n" +
+                "    \"name\": \"Test User\",\n" +
+                "    \"email\": \"test@example.com\"\n" +
+                "}";
         UserRequestDto result = objectMapper.readValue(json, UserRequestDto.class);
         assertNotNull(result);
         assertEquals("Test User", result.getName());
@@ -44,11 +43,10 @@ class UserRequestDtoJsonTest {
 
     @Test
     void deserialize_ShouldHandleNullValues() throws JsonProcessingException {
-        String json = """
-                {
-                    "name": null,
-                    "email": null
-                }""";
+        String json = "{\n" +
+                "    \"name\": null,\n" +
+                "    \"email\": null\n" +
+                "}";
         UserRequestDto result = objectMapper.readValue(json, UserRequestDto.class);
         assertNotNull(result);
         assertNull(result.getName());
@@ -84,11 +82,10 @@ class UserRequestDtoJsonTest {
 
     @Test
     void deserialize_ShouldHandleEmptyStrings() throws JsonProcessingException {
-        String json = """
-                {
-                    "name": "",
-                    "email": ""
-                }""";
+        String json = "{\n" +
+                "    \"name\": \"\",\n" +
+                "    \"email\": \"\"\n" +
+                "}";
 
         UserRequestDto result = objectMapper.readValue(json, UserRequestDto.class);
 
@@ -99,11 +96,10 @@ class UserRequestDtoJsonTest {
 
     @Test
     void deserialize_ShouldHandleUnicodeCharacters() throws JsonProcessingException {
-        String json = """
-                {
-                    "name": "Тестовый Пользователь",
-                    "email": "тест@пример.рф"
-                }""";
+        String json = "{\n" +
+                "    \"name\": \"Тестовый Пользователь\",\n" +
+                "    \"email\": \"тест@пример.рф\"\n" +
+                "}";
         UserRequestDto result = objectMapper.readValue(json, UserRequestDto.class);
         assertNotNull(result);
         assertEquals("Тестовый Пользователь", result.getName());

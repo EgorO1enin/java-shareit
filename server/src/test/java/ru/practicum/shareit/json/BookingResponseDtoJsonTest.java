@@ -58,8 +58,8 @@ class BookingResponseDtoJsonTest {
 
     @Test
     void deserialize_ShouldDeserializeCorrectly() throws JsonProcessingException {
-        String json = """
-                {
+        String json = """ 
+                    {
                     "id": 1,
                     "start": "2024-01-15T10:00:00",
                     "end": "2024-01-16T10:00:00",

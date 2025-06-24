@@ -87,51 +87,50 @@ class ItemResponesDtoJsonTest {
 
     @Test
     void deserialize_ShouldDeserializeCorrectly() throws JsonProcessingException {
-        String json = """
-                {
-                    "id": 1,
-                    "name": "Дрель",
-                    "description": "Мощная дрель",
-                    "available": true,
-                    "ownerId": 1,
-                    "requestId": null,
-                    "lastBooking": {
-                        "id": 1,
-                        "start": "2024-01-10T10:00:00",
-                        "end": "2024-01-12T10:00:00",
-                        "status": "APPROVED",
-                        "booker": {
-                            "id": 2,
-                            "name": "Last Booker",
-                            "email": "last@email.com"
-                        }
-                    },
-                    "nextBooking": {
-                        "id": 2,
-                        "start": "2024-01-20T10:00:00",
-                        "end": "2024-01-22T10:00:00",
-                        "status": "WAITING",
-                        "booker": {
-                            "id": 3,
-                            "name": "Next Booker",
-                            "email": "next@email.com"
-                        }
-                    },
-                    "comments": [
-                        {
-                            "id": 1,
-                            "text": "Отличная вещь!",
-                            "authorName": "Commenter1",
-                            "created": "2024-01-13T10:00:00"
-                        },
-                        {
-                            "id": 2,
-                            "text": "Рекомендую!",
-                            "authorName": "Commenter2",
-                            "created": "2024-01-14T10:00:00"
-                        }
-                    ]
-                }""";
+        String json = "{\n" +
+                "    \"id\": 1,\n" +
+                "    \"name\": \"Дрель\",\n" +
+                "    \"description\": \"Мощная дрель\",\n" +
+                "    \"available\": true,\n" +
+                "    \"ownerId\": 1,\n" +
+                "    \"requestId\": null,\n" +
+                "    \"lastBooking\": {\n" +
+                "        \"id\": 1,\n" +
+                "        \"start\": \"2024-01-10T10:00:00\",\n" +
+                "        \"end\": \"2024-01-12T10:00:00\",\n" +
+                "        \"status\": \"APPROVED\",\n" +
+                "        \"booker\": {\n" +
+                "            \"id\": 2,\n" +
+                "            \"name\": \"Last Booker\",\n" +
+                "            \"email\": \"last@email.com\"\n" +
+                "        }\n" +
+                "    },\n" +
+                "    \"nextBooking\": {\n" +
+                "        \"id\": 2,\n" +
+                "        \"start\": \"2024-01-20T10:00:00\",\n" +
+                "        \"end\": \"2024-01-22T10:00:00\",\n" +
+                "        \"status\": \"WAITING\",\n" +
+                "        \"booker\": {\n" +
+                "            \"id\": 3,\n" +
+                "            \"name\": \"Next Booker\",\n" +
+                "            \"email\": \"next@email.com\"\n" +
+                "        }\n" +
+                "    },\n" +
+                "    \"comments\": [\n" +
+                "        {\n" +
+                "            \"id\": 1,\n" +
+                "            \"text\": \"Отличная вещь!\",\n" +
+                "            \"authorName\": \"Commenter1\",\n" +
+                "            \"created\": \"2024-01-13T10:00:00\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 2,\n" +
+                "            \"text\": \"Рекомендую!\",\n" +
+                "            \"authorName\": \"Commenter2\",\n" +
+                "            \"created\": \"2024-01-14T10:00:00\"\n" +
+                "        }\n" +
+                "    ]\n" +
+                "}";
 
         ItemResponesDto result = objectMapper.readValue(json, ItemResponesDto.class);
 
@@ -165,18 +164,17 @@ class ItemResponesDtoJsonTest {
 
     @Test
     void deserialize_ShouldHandleNullValues() throws JsonProcessingException {
-        String json = """
-                {
-                    "id": null,
-                    "name": null,
-                    "description": null,
-                    "available": null,
-                    "ownerId": null,
-                    "requestId": null,
-                    "lastBooking": null,
-                    "nextBooking": null,
-                    "comments": null
-                }""";
+        String json = "{\n" +
+                "    \"id\": null,\n" +
+                "    \"name\": null,\n" +
+                "    \"description\": null,\n" +
+                "    \"available\": null,\n" +
+                "    \"ownerId\": null,\n" +
+                "    \"requestId\": null,\n" +
+                "    \"lastBooking\": null,\n" +
+                "    \"nextBooking\": null,\n" +
+                "    \"comments\": null\n" +
+                "}";
 
         ItemResponesDto result = objectMapper.readValue(json, ItemResponesDto.class);
 
@@ -194,15 +192,14 @@ class ItemResponesDtoJsonTest {
 
     @Test
     void deserialize_ShouldHandleEmptyComments() throws JsonProcessingException {
-        String json = """
-                {
-                    "id": 1,
-                    "name": "Дрель",
-                    "description": "Мощная дрель",
-                    "available": true,
-                    "ownerId": 1,
-                    "comments": []
-                }""";
+        String json = "{\n" +
+                "    \"id\": 1,\n" +
+                "    \"name\": \"Дрель\",\n" +
+                "    \"description\": \"Мощная дрель\",\n" +
+                "    \"available\": true,\n" +
+                "    \"ownerId\": 1,\n" +
+                "    \"comments\": []\n" +
+                "}";
 
         ItemResponesDto result = objectMapper.readValue(json, ItemResponesDto.class);
 
