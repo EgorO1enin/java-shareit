@@ -89,7 +89,8 @@ public class BaseClient {
     }
 
     protected ResponseEntity<Object> get(String path, long userId, String state, int from, int size) {
-        return get(path, userId, state, from, size);
+        Map<String, Object> parameters = Map.of("state", state, "from", from, "size", size);
+        return makeAndSendRequest(HttpMethod.GET, path, userId, parameters, null);
     }
 
     private <T> ResponseEntity<Object> makeAndSendRequest(HttpMethod method, String path, Long userId, @Nullable Map<String, Object> parameters, @Nullable T body) {
