@@ -20,7 +20,6 @@ class ErrorResponseJsonTest {
     void setUp() {
         objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
-        
         errorResponse = new ErrorResponse();
         errorResponse.setError("Ошибка валидации");
         errorResponse.setMessage("Поле name не может быть пустым");
@@ -142,4 +141,4 @@ class ErrorResponseJsonTest {
         assertNotNull(json);
         assertTrue(json.contains("{}") || json.contains("null"));
     }
-} 
+}
