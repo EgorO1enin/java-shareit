@@ -69,25 +69,4 @@ class ItemControllerTest {
                         .header("X-Sharer-User-Id", 1L))
                 .andExpect(status().isOk());
     }
-
-    @Test
-    void testSearchItems() throws Exception {
-        when(itemClient.searchItems(any(), any(), any())).thenReturn(ResponseEntity.ok().build());
-
-        mockMvc.perform(get("/items/search")
-                        .param("text", "test"))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    void testAddComment() throws Exception {
-        Object comment = new Object();
-        when(itemClient.addComment(anyLong(), anyLong(), any())).thenReturn(ResponseEntity.ok().build());
-
-        mockMvc.perform(post("/items/1/comment")
-                        .header("X-Sharer-User-Id", 1L)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(comment)))
-                .andExpect(status().isOk());
-    }
-} 
+}

@@ -29,10 +29,10 @@ class BookingRequestDtoJsonTest {
 
     @Test
     void serialize_ShouldSerializeCorrectly() throws JsonProcessingException {
-        
+
         String json = objectMapper.writeValueAsString(bookingRequestDto);
 
-        
+
         assertNotNull(json);
         assertTrue(json.contains("\"itemId\":1"));
         assertTrue(json.contains("\"start\":"));
@@ -41,7 +41,7 @@ class BookingRequestDtoJsonTest {
 
     @Test
     void deserialize_ShouldDeserializeCorrectly() throws JsonProcessingException {
-        
+
         String json = """
                 {
                     "itemId": 1,
@@ -50,10 +50,10 @@ class BookingRequestDtoJsonTest {
                 }
                 """;
 
-        
+
         BookingRequestDto result = objectMapper.readValue(json, BookingRequestDto.class);
 
-        
+
         assertNotNull(result);
         assertEquals(1L, result.getItemId());
         assertEquals(LocalDateTime.of(2024, 1, 15, 10, 0), result.getStart());
@@ -62,7 +62,7 @@ class BookingRequestDtoJsonTest {
 
     @Test
     void deserialize_ShouldHandleNullValues() throws JsonProcessingException {
-        
+
         String json = """
                 {
                     "itemId": null,
@@ -71,10 +71,10 @@ class BookingRequestDtoJsonTest {
                 }
                 """;
 
-        
+
         BookingRequestDto result = objectMapper.readValue(json, BookingRequestDto.class);
 
-        
+
         assertNotNull(result);
         assertNull(result.getItemId());
         assertNull(result.getStart());
@@ -83,13 +83,13 @@ class BookingRequestDtoJsonTest {
 
     @Test
     void deserialize_ShouldHandleMissingFields() throws JsonProcessingException {
-        
+
         String json = "{}";
 
-        
+
         BookingRequestDto result = objectMapper.readValue(json, BookingRequestDto.class);
 
-        
+
         assertNotNull(result);
         assertNull(result.getItemId());
         assertNull(result.getStart());
@@ -98,11 +98,11 @@ class BookingRequestDtoJsonTest {
 
     @Test
     void roundTrip_ShouldPreserveData() throws JsonProcessingException {
-        
+
         String json = objectMapper.writeValueAsString(bookingRequestDto);
         BookingRequestDto result = objectMapper.readValue(json, BookingRequestDto.class);
 
-        
+
         assertEquals(bookingRequestDto.getItemId(), result.getItemId());
         assertEquals(bookingRequestDto.getStart(), result.getStart());
         assertEquals(bookingRequestDto.getEnd(), result.getEnd());
@@ -110,7 +110,7 @@ class BookingRequestDtoJsonTest {
 
     @Test
     void deserialize_ShouldHandleDifferentDateTimeFormats() throws JsonProcessingException {
-        
+
         String json = """
                 {
                     "itemId": 1,
@@ -119,10 +119,10 @@ class BookingRequestDtoJsonTest {
                 }
                 """;
 
-        
+
         BookingRequestDto result = objectMapper.readValue(json, BookingRequestDto.class);
 
-        
+
         assertNotNull(result);
         assertEquals(1L, result.getItemId());
         assertEquals(LocalDateTime.of(2024, 1, 15, 10, 0), result.getStart());
@@ -131,18 +131,18 @@ class BookingRequestDtoJsonTest {
 
     @Test
     void serialize_ShouldHandleNullValues() throws JsonProcessingException {
-        
+
         bookingRequestDto.setItemId(null);
         bookingRequestDto.setStart(null);
         bookingRequestDto.setEnd(null);
 
-        
+
         String json = objectMapper.writeValueAsString(bookingRequestDto);
 
-        
+
         assertNotNull(json);
         assertTrue(json.contains("\"itemId\":null"));
         assertTrue(json.contains("\"start\":null"));
         assertTrue(json.contains("\"end\":null"));
     }
-} 
+}

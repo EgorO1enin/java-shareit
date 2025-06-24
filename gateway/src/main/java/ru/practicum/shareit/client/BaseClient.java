@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
-import ru.practicum.shareit.booking.dto.BookingState;
 
 public class BaseClient {
     protected final RestTemplate rest;
@@ -35,7 +34,8 @@ public class BaseClient {
     protected <T> ResponseEntity<Object> post(String path, T body) {
         return post(path, null, null, body);
     }
-    protected <T> ResponseEntity<Object> post(String path, long userId, T body, boolean approve){
+
+    protected <T> ResponseEntity<Object> post(String path, long userId, T body, boolean approve) {
         return post(path, userId, null, body);
     }
 

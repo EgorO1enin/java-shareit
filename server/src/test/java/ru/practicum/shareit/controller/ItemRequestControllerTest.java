@@ -42,9 +42,9 @@ class ItemRequestControllerTest {
         response.setCreated(LocalDateTime.now());
         Mockito.when(itemRequestService.createRequest(eq(1L), any(ItemRequestRequestDto.class))).thenReturn(response);
         mockMvc.perform(post("/requests")
-                .header("X-Sharer-User-Id", "1")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(request)))
+                        .header("X-Sharer-User-Id", "1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.description").value(request.getDescription()));
@@ -63,7 +63,7 @@ class ItemRequestControllerTest {
         request2.setCreated(LocalDateTime.now());
         Mockito.when(itemRequestService.getUserRequests(1L)).thenReturn(List.of(request1, request2));
         mockMvc.perform(get("/requests")
-                .header("X-Sharer-User-Id", "1"))
+                        .header("X-Sharer-User-Id", "1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1L))
                 .andExpect(jsonPath("$[1].id").value(2L));
@@ -82,9 +82,9 @@ class ItemRequestControllerTest {
         request2.setCreated(LocalDateTime.now());
         Mockito.when(itemRequestService.getAllRequests(eq(1L), eq(0), eq(10))).thenReturn(List.of(request1, request2));
         mockMvc.perform(get("/requests/all")
-                .header("X-Sharer-User-Id", "1")
-                .param("from", "0")
-                .param("size", "10"))
+                        .header("X-Sharer-User-Id", "1")
+                        .param("from", "0")
+                        .param("size", "10"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1L))
                 .andExpect(jsonPath("$[1].id").value(2L));
@@ -99,9 +99,9 @@ class ItemRequestControllerTest {
         response.setCreated(LocalDateTime.now());
         Mockito.when(itemRequestService.getRequestById(1L, 1L)).thenReturn(response);
         mockMvc.perform(get("/requests/1")
-                .header("X-Sharer-User-Id", "1"))
+                        .header("X-Sharer-User-Id", "1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.description").value("Нужен степлер"));
     }
-} 
+}

@@ -122,4 +122,4 @@ class BookingControllerTest {
                 .andExpect(jsonPath("$[0].id").value(1L))
                 .andExpect(jsonPath("$[1].id").value(2L));
     }
-} 
+}

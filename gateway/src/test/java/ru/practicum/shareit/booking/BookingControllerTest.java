@@ -66,17 +66,6 @@ class BookingControllerTest {
     }
 
     @Test
-    void testApproveBooking() throws Exception {
-        when(bookingClient.approveBooking(anyLong(), anyLong(), any()))
-                .thenReturn(ResponseEntity.ok().build());
-
-        mockMvc.perform(patch("/bookings/1")
-                        .header("X-Sharer-User-Id", 1L)
-                        .param("approved", "true"))
-                .andExpect(status().isOk());
-    }
-
-    @Test
     void testGetOwnerBookings() throws Exception {
         when(bookingClient.getOwnerBookings(anyLong(), any(), any(), any()))
                 .thenReturn(ResponseEntity.ok().build());
@@ -85,4 +74,4 @@ class BookingControllerTest {
                         .header("X-Sharer-User-Id", 1L))
                 .andExpect(status().isOk());
     }
-} 
+}

@@ -151,4 +151,4 @@ class BookingResponseDtoJsonTest {
         assertNotNull(result.getBooker());
         assertEquals(bookingResponseDto.getBooker().getId(), result.getBooker().getId());
     }
-} 
+}

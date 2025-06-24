@@ -15,4 +15,4 @@ public class SwaggerConfig {
                         .version("1.0")
                         .description("Документация Gateway слоя ShareIt"));
     }
-} 
+}

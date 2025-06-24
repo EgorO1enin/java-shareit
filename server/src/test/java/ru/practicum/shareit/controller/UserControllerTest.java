@@ -99,4 +99,4 @@ class UserControllerTest {
                 .andExpect(status().isOk());
         Mockito.verify(userService).deleteUser(1L);
     }
-} 
+}

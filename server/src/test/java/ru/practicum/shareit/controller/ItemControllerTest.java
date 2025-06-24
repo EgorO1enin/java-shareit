@@ -136,4 +136,4 @@ class ItemControllerTest {
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.text").value(commentRequest.getText()));
     }
-} 
+}

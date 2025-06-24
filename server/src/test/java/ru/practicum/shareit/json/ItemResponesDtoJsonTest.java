@@ -235,4 +235,4 @@ class ItemResponesDtoJsonTest {
         assertNotNull(result.getComments());
         assertEquals(itemResponesDto.getComments().size(), result.getComments().size());
     }
-} 
+}

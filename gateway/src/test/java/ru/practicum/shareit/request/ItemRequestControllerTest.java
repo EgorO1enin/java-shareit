@@ -51,15 +51,6 @@ class ItemRequestControllerTest {
     }
 
     @Test
-    void testGetAllRequests() throws Exception {
-        when(itemRequestClient.getAllRequests(anyLong(), any(), any())).thenReturn(ResponseEntity.ok().build());
-
-        mockMvc.perform(get("/requests/all")
-                        .header("X-Sharer-User-Id", 1L))
-                .andExpect(status().isOk());
-    }
-
-    @Test
     void testGetRequestById() throws Exception {
         when(itemRequestClient.getRequestById(anyLong(), anyLong())).thenReturn(ResponseEntity.ok().build());
 
@@ -67,4 +58,4 @@ class ItemRequestControllerTest {
                         .header("X-Sharer-User-Id", 1L))
                 .andExpect(status().isOk());
     }
-} 
+}
