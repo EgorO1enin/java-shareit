@@ -67,7 +67,6 @@ public class BookingServiceImpl implements BookingService {
     public BookingResponseDto approveBooking(Long userId, Long bookingId, boolean approved) {
         Booking booking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new NotFoundException("Бронирование не найдено"));
-
         if (!booking.getItem().getOwner().getId().equals(userId)) {
             throw new ForbiddenException("Пользователь не является владельцем вещи");
         }

@@ -8,7 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.user.dto.UserRequestDto;
-import ru.practicum.shareit.user.dto.UserResponesDto;
+import ru.practicum.shareit.user.dto.UserResponseDto;
 import ru.practicum.shareit.user.dto.UserUpdateDto;
 import ru.practicum.shareit.user.service.UserService;
 
@@ -30,7 +30,7 @@ public class UserController {
                     @ApiResponse(responseCode = "200", description = "Пользователь создан"),
                     @ApiResponse(responseCode = "400", description = "Некорректные данные пользователя")
             })
-    public UserResponesDto addUser(
+    public UserResponseDto addUser(
             @Valid
             @RequestBody
             @Parameter(description = "Данные нового пользователя", required = true)
@@ -44,7 +44,7 @@ public class UserController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Список пользователей")
             })
-    public List<UserResponesDto> getAllUsers() {
+    public List<UserResponseDto> getAllUsers() {
         return userService.getAllUsers();
     }
 
@@ -55,7 +55,7 @@ public class UserController {
                     @ApiResponse(responseCode = "200", description = "Информация о пользователе"),
                     @ApiResponse(responseCode = "404", description = "Пользователь не найден")
             })
-    public UserResponesDto getUser(
+    public UserResponseDto getUser(
             @PathVariable
             @Parameter(description = "ID пользователя", required = true, example = "1")
             Long userId) {
@@ -70,7 +70,7 @@ public class UserController {
                     @ApiResponse(responseCode = "400", description = "Некорректные данные для обновления"),
                     @ApiResponse(responseCode = "404", description = "Пользователь не найден")
             })
-    public UserResponesDto updateUser(
+    public UserResponseDto updateUser(
             @PathVariable
             @Parameter(description = "ID пользователя для обновления", required = true, example = "1")
             Long userId,

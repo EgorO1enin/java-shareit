@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.exception.NotFoundException;
 import ru.practicum.shareit.user.dto.UserRequestDto;
-import ru.practicum.shareit.user.dto.UserResponesDto;
+import ru.practicum.shareit.user.dto.UserResponseDto;
 import ru.practicum.shareit.user.dto.UserUpdateDto;
 import ru.practicum.shareit.user.mapper.UserMapper;
 import ru.practicum.shareit.user.model.User;
@@ -23,30 +23,30 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserResponesDto addUser(UserRequestDto user) {
+    public UserResponseDto addUser(UserRequestDto user) {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new IllegalArgumentException("Пользователь с email " + user.getEmail() + " уже существует.");
         }
         User newUser = userMapper.toUser(user);
-        return userMapper.toUserResponesDto(userRepository.save(newUser));
+        return userMapper.toUserResponseDto(userRepository.save(newUser));
     }
 
     @Override
-    public List<UserResponesDto> getAllUsers() {
+    public List<UserResponseDto> getAllUsers() {
         return userRepository.findAll().stream()
-                .map(userMapper::toUserResponesDto)
+                .map(userMapper::toUserResponseDto)
                 .toList();
     }
 
     @Override
-    public UserResponesDto getUserById(Long id) {
-        return userMapper.toUserResponesDto(userRepository.findById(id)
+    public UserResponseDto getUserById(Long id) {
+        return userMapper.toUserResponseDto(userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Пользователь с id " + id + " не найден")));
     }
 
     @Override
     @Transactional
-    public UserResponesDto updateUser(Long id, UserUpdateDto userUpdateDto) {
+    public UserResponseDto updateUser(Long id, UserUpdateDto userUpdateDto) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Пользователь с id " + id + " не найден"));
         if (userUpdateDto.getName() != null) {
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
             }
             user.setEmail(userUpdateDto.getEmail());
         }
-        return userMapper.toUserResponesDto(userRepository.save(user));
+        return userMapper.toUserResponseDto(userRepository.save(user));
     }
 
     @Override

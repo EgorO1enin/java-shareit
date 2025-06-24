@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 @NoArgsConstructor
-public class UserResponesDto {
+public class UserResponseDto {
     private Long id;
     private String name;
     private String email;
