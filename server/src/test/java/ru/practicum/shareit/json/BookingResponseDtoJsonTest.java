@@ -58,24 +58,23 @@ class BookingResponseDtoJsonTest {
 
     @Test
     void deserialize_ShouldDeserializeCorrectly() throws JsonProcessingException {
-        String json = """ 
-                    {
-                    "id": 1,
-                    "start": "2024-01-15T10:00:00",
-                    "end": "2024-01-16T10:00:00",
-                    "status": "APPROVED",
-                    "item": {
-                        "id": 1,
-                        "name": "Дрель",
-                        "description": "Мощная дрель",
-                        "available": true
-                    },
-                    "booker": {
-                        "id": 1,
-                        "name": "Booker",
-                        "email": "booker@email.com"
-                    }
-                }""";
+        String json = "{\n" +
+                "    \"id\": 1,\n" +
+                "    \"start\": \"2024-01-15T10:00:00\",\n" +
+                "    \"end\": \"2024-01-16T10:00:00\",\n" +
+                "    \"status\": \"APPROVED\",\n" +
+                "    \"item\": {\n" +
+                "        \"id\": 1,\n" +
+                "        \"name\": \"Дрель\",\n" +
+                "        \"description\": \"Мощная дрель\",\n" +
+                "        \"available\": true\n" +
+                "    },\n" +
+                "    \"booker\": {\n" +
+                "        \"id\": 1,\n" +
+                "        \"name\": \"Booker\",\n" +
+                "        \"email\": \"booker@email.com\"\n" +
+                "    }\n" +
+                "}";
 
         BookingResponseDto result = objectMapper.readValue(json, BookingResponseDto.class);
 
@@ -94,13 +93,12 @@ class BookingResponseDtoJsonTest {
 
     @Test
     void deserialize_ShouldHandleDifferentDateTimeFormats() throws JsonProcessingException {
-        String json = """
-                {
-                    "id": 1,
-                    "start": "2024-01-15T10:00:00.000",
-                    "end": "2024-01-16T10:00:00.000",
-                    "status": "WAITING"
-                }""";
+        String json = "{\n" +
+                "    \"id\": 1,\n" +
+                "    \"start\": \"2024-01-15T10:00:00.000\",\n" +
+                "    \"end\": \"2024-01-16T10:00:00.000\",\n" +
+                "    \"status\": \"WAITING\"\n" +
+                "}";
 
         BookingResponseDto result = objectMapper.readValue(json, BookingResponseDto.class);
 
@@ -113,15 +111,14 @@ class BookingResponseDtoJsonTest {
 
     @Test
     void deserialize_ShouldHandleNullValues() throws JsonProcessingException {
-        String json = """
-                {
-                    "id": null,
-                    "start": null,
-                    "end": null,
-                    "status": null,
-                    "item": null,
-                    "booker": null
-                }""";
+        String json = "{\n" +
+                "    \"id\": null,\n" +
+                "    \"start\": null,\n" +
+                "    \"end\": null,\n" +
+                "    \"status\": null,\n" +
+                "    \"item\": null,\n" +
+                "    \"booker\": null\n" +
+                "}";
 
         BookingResponseDto result = objectMapper.readValue(json, BookingResponseDto.class);
 

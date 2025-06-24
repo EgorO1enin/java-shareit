@@ -80,4 +80,4 @@ class ItemRequestServiceIntegrationTest {
         assertThat(found.getId()).isEqualTo(created.getId());
         assertThat(found.getDescription()).isEqualTo(requestDto.getDescription());
     }
-} 
+}
