@@ -131,8 +131,7 @@ class ItemResponesDtoJsonTest {
                             "created": "2024-01-14T10:00:00"
                         }
                     ]
-                }
-                """;
+                }""";
 
         ItemResponesDto result = objectMapper.readValue(json, ItemResponesDto.class);
 
@@ -177,8 +176,7 @@ class ItemResponesDtoJsonTest {
                     "lastBooking": null,
                     "nextBooking": null,
                     "comments": null
-                }
-                """;
+                }""";
 
         ItemResponesDto result = objectMapper.readValue(json, ItemResponesDto.class);
 
@@ -204,8 +202,7 @@ class ItemResponesDtoJsonTest {
                     "available": true,
                     "ownerId": 1,
                     "comments": []
-                }
-                """;
+                }""";
 
         ItemResponesDto result = objectMapper.readValue(json, ItemResponesDto.class);
 

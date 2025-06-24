@@ -5,7 +5,6 @@ import org.mapstruct.Mapping;
 import ru.practicum.shareit.request.dto.ItemRequestRequestDto;
 import ru.practicum.shareit.request.dto.ItemRequestResponseDto;
 import ru.practicum.shareit.request.model.ItemRequest;
-import ru.practicum.shareit.user.dto.UserResponseDto;
 import ru.practicum.shareit.user.mapper.UserMapper;
 
 /**
@@ -22,5 +21,4 @@ public interface ItemRequestMapper {
     @Mapping(target = "items", ignore = true)
     @Mapping(target = "requestor", expression = "java(userMapper.toUserResponseDto(entity.getRequestor()))")
     ItemRequestResponseDto toResponseDto(ItemRequest entity, UserMapper userMapper);
-
 }

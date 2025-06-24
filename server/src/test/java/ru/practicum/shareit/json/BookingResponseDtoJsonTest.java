@@ -75,8 +75,7 @@ class BookingResponseDtoJsonTest {
                         "name": "Booker",
                         "email": "booker@email.com"
                     }
-                }
-                """;
+                }""";
 
         BookingResponseDto result = objectMapper.readValue(json, BookingResponseDto.class);
 
@@ -101,8 +100,7 @@ class BookingResponseDtoJsonTest {
                     "start": "2024-01-15T10:00:00.000",
                     "end": "2024-01-16T10:00:00.000",
                     "status": "WAITING"
-                }
-                """;
+                }""";
 
         BookingResponseDto result = objectMapper.readValue(json, BookingResponseDto.class);
 
@@ -123,8 +121,7 @@ class BookingResponseDtoJsonTest {
                     "status": null,
                     "item": null,
                     "booker": null
-                }
-                """;
+                }""";
 
         BookingResponseDto result = objectMapper.readValue(json, BookingResponseDto.class);
 

@@ -13,8 +13,6 @@ import ru.practicum.shareit.booking.controller.BookingController;
 import ru.practicum.shareit.booking.dto.BookingRequestDto;
 import ru.practicum.shareit.booking.dto.BookingResponseDto;
 import ru.practicum.shareit.booking.service.BookingService;
-import ru.practicum.shareit.item.dto.ItemResponesDto;
-import ru.practicum.shareit.user.dto.UserResponseDto;
 
 import java.time.LocalDateTime;
 import java.util.List;

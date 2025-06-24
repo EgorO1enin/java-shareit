@@ -35,8 +35,7 @@ class UserRequestDtoJsonTest {
                 {
                     "name": "Test User",
                     "email": "test@example.com"
-                }
-                """;
+                }""";
         UserRequestDto result = objectMapper.readValue(json, UserRequestDto.class);
         assertNotNull(result);
         assertEquals("Test User", result.getName());
@@ -49,8 +48,7 @@ class UserRequestDtoJsonTest {
                 {
                     "name": null,
                     "email": null
-                }
-                """;
+                }""";
         UserRequestDto result = objectMapper.readValue(json, UserRequestDto.class);
         assertNotNull(result);
         assertNull(result.getName());
@@ -86,17 +84,13 @@ class UserRequestDtoJsonTest {
 
     @Test
     void deserialize_ShouldHandleEmptyStrings() throws JsonProcessingException {
-
         String json = """
                 {
                     "name": "",
                     "email": ""
-                }
-                """;
-
+                }""";
 
         UserRequestDto result = objectMapper.readValue(json, UserRequestDto.class);
-
 
         assertNotNull(result);
         assertEquals("", result.getName());
@@ -109,8 +103,7 @@ class UserRequestDtoJsonTest {
                 {
                     "name": "Тестовый Пользователь",
                     "email": "тест@пример.рф"
-                }
-                """;
+                }""";
         UserRequestDto result = objectMapper.readValue(json, UserRequestDto.class);
         assertNotNull(result);
         assertEquals("Тестовый Пользователь", result.getName());
