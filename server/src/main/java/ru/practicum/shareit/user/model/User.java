@@ -6,9 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- * TODO Sprint add-controllers.
- */
 @Entity
 @Table(name = "users")
 @Getter
