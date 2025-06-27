@@ -75,7 +75,7 @@ public class ItemController {
     public ResponseEntity<Object> addComment(
             @Parameter(description = "ID пользователя", required = true) @RequestHeader("X-Sharer-User-Id") Long userId,
             @Parameter(description = "ID вещи", required = true) @PathVariable Long itemId,
-            @Parameter(description = "Данные комментария", required = true) @RequestBody Object commentDto) {
+            @Parameter(description = "Данные комментария", required = true) @RequestBody @Valid Object commentDto) {
         log.info("Add comment to item {}, userId={}", itemId, userId);
         return itemClient.addComment(userId, itemId, commentDto);
     }

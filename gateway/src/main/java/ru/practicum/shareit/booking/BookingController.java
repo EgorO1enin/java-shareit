@@ -28,11 +28,11 @@ public class BookingController {
 	@Operation(summary = "Получить список бронирований пользователя", description = "Позволяет получить список бронирований с фильтрацией по статусу и пагинацией.")
 	@GetMapping
 	public ResponseEntity<Object> getBookings(
-			@Parameter(description = "ID пользователя", required = true) @RequestHeader("X-Sharer-User-Id") long userId,
+			@Parameter(description = "ID пользователя", required = true) @RequestHeader("X-Sharer-User-Id") Long userId,
 			@Parameter(description = "Статус бронирования (ALL, CURRENT, PAST, FUTURE, WAITING, REJECTED)", example = "all")
-			@RequestParam(name = "state", defaultValue = "all") String stateParam,
+			@RequestParam(defaultValue = "all") String stateParam,
 			@Parameter(description = "Номер первого элемента для пагинации", example = "0")
-			@PositiveOrZero @RequestParam(name = "from", defaultValue = "0") Integer from,
+			@PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
 			@Parameter(description = "Количество элементов для пагинации", example = "10")
 			@Positive @RequestParam(name = "size", defaultValue = "10") Integer size) {
 		BookingState state = BookingState.from(stateParam)

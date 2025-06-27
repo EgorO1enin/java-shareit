@@ -43,7 +43,6 @@ public class ItemController {
             @RequestHeader("X-Sharer-User-Id")
             @Parameter(description = "ID владельца вещи", required = true, example = "1")
             Long userId,
-            @Valid
             @RequestBody
             @Parameter(description = "Данные новой вещи", required = true)
             ItemRequestDto itemDto) {
@@ -169,7 +168,6 @@ public class ItemController {
             @PathVariable
             @Parameter(description = "ID вещи")
             Long itemId,
-            @Valid
             @RequestBody
             @Parameter(description = "Данные комментария")
             CommentDto commentDto) {

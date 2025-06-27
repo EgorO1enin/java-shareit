@@ -28,7 +28,7 @@ public class BookingController {
     @Operation(summary = "Создание нового бронирования")
     public ResponseEntity<BookingResponseDto> createBooking(
             @RequestHeader("X-Sharer-User-Id") @Parameter(description = "ID пользователя") Long userId,
-            @Valid @RequestBody @Parameter(description = "Данные бронирования") BookingRequestDto bookingRequestDto) {
+            @RequestBody @Parameter(description = "Данные бронирования") BookingRequestDto bookingRequestDto) {
         return ResponseEntity.ok(bookingService.createBooking(userId, bookingRequestDto));
     }
 
@@ -55,8 +55,8 @@ public class BookingController {
     public ResponseEntity<List<BookingResponseDto>> getUserBookings(
             @RequestHeader("X-Sharer-User-Id") @Parameter(description = "ID пользователя") Long userId,
             @RequestParam(defaultValue = "ALL") @Parameter(description = "Статус бронирования") String state,
-            @RequestParam(defaultValue = "0") @PositiveOrZero @Parameter(description = "Индекс первого элемента") int from,
-            @RequestParam(defaultValue = "10") @Positive @Parameter(description = "Количество элементов для отображения") int size) {
+            @RequestParam(defaultValue = "0") @Parameter(description = "Индекс первого элемента") int from,
+            @RequestParam(defaultValue = "10") @Parameter(description = "Количество элементов для отображения") int size) {
         return ResponseEntity.ok(bookingService.getUserBookings(userId, state, from, size));
     }
 
@@ -65,8 +65,8 @@ public class BookingController {
     public ResponseEntity<List<BookingResponseDto>> getOwnerBookings(
             @RequestHeader("X-Sharer-User-Id") @Parameter(description = "ID пользователя") Long userId,
             @RequestParam(defaultValue = "ALL") @Parameter(description = "Статус бронирования") String state,
-            @RequestParam(defaultValue = "0") @PositiveOrZero @Parameter(description = "Индекс первого элемента") int from,
-            @RequestParam(defaultValue = "10") @Positive @Parameter(description = "Количество элементов для отображения") int size) {
+            @RequestParam(defaultValue = "0") @Parameter(description = "Индекс первого элемента") int from,
+            @RequestParam(defaultValue = "10") @Parameter(description = "Количество элементов для отображения") int size) {
         return ResponseEntity.ok(bookingService.getOwnerBookings(userId, state, from, size));
     }
 }

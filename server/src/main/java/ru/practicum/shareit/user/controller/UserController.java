@@ -31,7 +31,6 @@ public class UserController {
                     @ApiResponse(responseCode = "400", description = "Некорректные данные пользователя")
             })
     public UserResponseDto addUser(
-            @Valid
             @RequestBody
             @Parameter(description = "Данные нового пользователя", required = true)
             final UserRequestDto user) {
@@ -74,7 +73,6 @@ public class UserController {
             @PathVariable
             @Parameter(description = "ID пользователя для обновления", required = true, example = "1")
             Long userId,
-            @Valid
             @RequestBody
             @Parameter(description = "Обновленные данные пользователя", required = true)
             final UserUpdateDto user) {

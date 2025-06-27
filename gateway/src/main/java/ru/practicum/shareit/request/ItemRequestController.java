@@ -45,8 +45,8 @@ public class ItemRequestController {
     @GetMapping("/all")
     public ResponseEntity<Object> getAllRequests(
             @Parameter(description = "ID пользователя", required = true) @RequestHeader("X-Sharer-User-Id") Long userId,
-            @Parameter(description = "Номер первого элемента для пагинации", example = "0") @PositiveOrZero @RequestParam(name = "from", defaultValue = "0") Integer from,
-            @Parameter(description = "Количество элементов для пагинации", example = "10") @Positive @RequestParam(name = "size", defaultValue = "10") Integer size) {
+            @Parameter(description = "Номер первого элемента для пагинации", example = "0") @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
+            @Parameter(description = "Количество элементов для пагинации", example = "10") @Positive @RequestParam(defaultValue = "10") Integer size) {
         log.info("Get all item requests for user {}, from={}, size={}", userId, from, size);
         return itemRequestClient.getAllRequests(userId, from, size);
     }
