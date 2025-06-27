@@ -15,7 +15,8 @@ import ru.practicum.shareit.user.dto.UserUpdateDto;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DtoValidationTest {
 

@@ -5,17 +5,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import ru.practicum.shareit.booking.dto.BookingRequestDto;
+import ru.practicum.shareit.booking.service.BookingService;
+import ru.practicum.shareit.exception.BadRequestException;
 import ru.practicum.shareit.item.dto.CommentDto;
 import ru.practicum.shareit.item.dto.ItemRequestDto;
 import ru.practicum.shareit.item.dto.ItemResponesDto;
 import ru.practicum.shareit.item.service.ItemService;
-import ru.practicum.shareit.user.dto.UserRequestDto;
-import ru.practicum.shareit.user.service.UserService;
 import ru.practicum.shareit.request.dto.ItemRequestRequestDto;
 import ru.practicum.shareit.request.service.ItemRequestService;
-import ru.practicum.shareit.booking.dto.BookingRequestDto;
-import ru.practicum.shareit.booking.service.BookingService;
-import ru.practicum.shareit.exception.BadRequestException;
+import ru.practicum.shareit.user.dto.UserRequestDto;
+import ru.practicum.shareit.user.service.UserService;
 
 import java.time.LocalDateTime;
 
